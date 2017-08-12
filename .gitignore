@@ -1,0 +1,4 @@
+*.pyc
+*.py\~
+.vscode/
+env/
