@@ -6,6 +6,8 @@ Date: 2017-08-12 15:55:15. Created By paddyguan.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 import unittest
+import ujson as json
+import requests
 # import os
 # import sys
 # from .  import wsgi
@@ -27,8 +29,10 @@ class TestIndexCase(unittest.TestCase):
     def test_send_heart_rate(self):
         print 'test_send_heart_rate'
         test_url = 'send_heart_rate'
+        #a = requests.post('http://127.0.0.1:5000', json=json.dumps({'heart_rate': 123}), headers={'Content-type': 'application/json;charset=utf-8'})
         with self.app.app_context():
-            r = self.client.post(test_url, data={'heart_rate': '123'})
+            print dir(self.client.post)
+            r = self.client.post(test_url, data=json.dumps({'heart_rate': '123'}), headers={'Content-type': 'application/json;charset=utf-8'})
             print r.data
         print '-'*20
 
