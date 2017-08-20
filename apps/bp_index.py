@@ -23,7 +23,8 @@ def index():
 def get_heart_rate_from_client():
     print 'get_heart_from_client'
     try:
-        print request.form.get('heart_rate')
+        print 'form:', request.form.get('heart_rate')
+        print 'json:', request.get_json()
     except Exception, e:
         print e
     # js_data = json.loads(request.data)
