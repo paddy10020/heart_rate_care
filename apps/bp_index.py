@@ -9,7 +9,7 @@ import datetime
 import traceback
 
 import ujson as json
-from flask import Blueprint, current_app
+from flask import Blueprint, current_app, request
 from flask_login import current_user, login_required
 from flask import request
 
@@ -22,9 +22,17 @@ def index():
 @bp.route('/send_heart_rate', methods=['GET', 'POST'])
 def get_heart_rate_from_client():
     print 'get_heart_from_client'
-    heart_rate = str(request.form.get('heart_rate'))
-    print 'heart_rate is ' + heart_rate
-    return '<html><h1>heart_rate is %s </h1></html>' % heart_rate
+    try:
+        print request.form.get('heart_rate')
+    except Exception, e:
+        print e
+    # js_data = json.loads(request.data)
+    # print js_data
+    return json.dumps({'code':0,
+                       'msg': u'成功',
+                       'data': 0,
+                       })
+
 
 @bp.route('/get_heart_rate', methods=['GET'])
 def send_heart_rate():
