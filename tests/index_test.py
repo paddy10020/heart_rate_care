@@ -7,10 +7,8 @@ Date: 2017-08-12 15:55:15. Created By paddyguan.
 """
 import unittest
 import ujson as json
+import datetime
 import requests
-# import os
-# import sys
-# from .  import wsgi
 from wsgi import app
 
 class TestIndexCase(unittest.TestCase):
@@ -29,10 +27,10 @@ class TestIndexCase(unittest.TestCase):
     def test_send_heart_rate(self):
         print 'test_send_heart_rate'
         test_url = 'send_heart_rate'
-        #a = requests.post('http://127.0.0.1:5000', json=json.dumps({'heart_rate': 123}), headers={'Content-type': 'application/json;charset=utf-8'})
         with self.app.app_context():
-            print dir(self.client.post)
-            r = self.client.post(test_url, data=json.dumps({'heart_rate': '123'}), headers={'Content-type': 'application/json;charset=utf-8'})
+            with open('/Users/paddyguan/python_project/heart_rate_care/tests/lib/heart_rate_data.txt') as f:
+                heart_rate_data = [int(i.strip()) for i in f.readlines()]
+            r = self.client.post(test_url, data=json.dumps({'heart_rate': heart_rate_data, 'time': str(datetime.datetime.now())[0:19]}), headers={'Content-type': 'application/json;charset=utf-8'})
             print r.data
         print '-'*20
 

@@ -12,6 +12,7 @@ import ujson as json
 from flask import Blueprint, current_app, request
 from flask_login import current_user, login_required
 from flask import request
+from lib.deal_source_date import filter_date
 
 bp = Blueprint('bp_index', __name__)
 
@@ -23,14 +24,13 @@ def index():
 def get_heart_rate_from_client():
     print 'get_heart_from_client'
     try:
-        print 'form:', request.form.get('heart_rate')
-        print 'json:', request.get_json()
+        origin_data = request.get_json()
     except Exception, e:
         print e
-    # js_data = json.loads(request.data)
-    # print js_data
+    else:
+        result = filter_date(origin_data['heart_rate_date'])
     return json.dumps({'code':0,
-                       'msg': u'成功',
+                       'msg': 'success',
                        'data': 0,
                        })
 
