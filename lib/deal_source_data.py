@@ -20,5 +20,8 @@ def filter_date(origin_data):
 
 def compute_heart_rate(fft_data):
     '''计算心率'''
-    
+    max_data = max(fft_data[len(fft_data)/10:len(fft_data)/2])
+    for i,j in enumerate(fft_data):
+        if j == max_data:
+            return i*0.02
     return 0

@@ -10,7 +10,7 @@ import numpy as np
 from scipy import signal
 
 # 采样频率
-Fs = 20.0
+Fs = 25.0
 Ts = 1.0/Fs
 
 # 读取信号
@@ -44,4 +44,12 @@ xx_data = np.arange(0, len(filtered_fft_data)*Ts, Ts)
 plt.plot(xx_data, filtered_fft_data)
 # plt.show()
 print len(filtered_fft_data)
+a = max(filtered_fft_data[30:len(filtered_fft_data)/2])
 
+for i, j in enumerate(filtered_fft_data):
+    if j == a:
+        print i
+        break
+
+
+print a

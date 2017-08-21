@@ -29,7 +29,10 @@ def get_heart_rate_from_client():
     except Exception, e:
         print e
     else:
+        print type(origin_data['heart_rate_data'])
+        print len(origin_data['heart_rate_data'])
         result = filter_date(origin_data['heart_rate_data'])
+        print result
     return json.dumps({'code':0,
                        'msg': 'success',
                        'data': result,
