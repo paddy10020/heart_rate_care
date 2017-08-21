@@ -7,12 +7,13 @@ Date: 2017-08-10 23:33:34. Created By paddyguan.
 """
 import datetime
 import traceback
+from lib.deal_source_data import filter_date
 
 import ujson as json
 from flask import Blueprint, current_app, request
 from flask_login import current_user, login_required
 from flask import request
-from lib.deal_source_date import filter_date
+
 
 bp = Blueprint('bp_index', __name__)
 
@@ -28,10 +29,10 @@ def get_heart_rate_from_client():
     except Exception, e:
         print e
     else:
-        result = filter_date(origin_data['heart_rate_date'])
+        result = filter_date(origin_data['heart_rate_data'])
     return json.dumps({'code':0,
                        'msg': 'success',
-                       'data': 0,
+                       'data': result,
                        })
 
 

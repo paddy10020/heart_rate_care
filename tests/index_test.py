@@ -30,7 +30,7 @@ class TestIndexCase(unittest.TestCase):
         with self.app.app_context():
             with open('/Users/paddyguan/python_project/heart_rate_care/tests/lib/heart_rate_data.txt') as f:
                 heart_rate_data = [int(i.strip()) for i in f.readlines()]
-            r = self.client.post(test_url, data=json.dumps({'heart_rate': heart_rate_data, 'time': str(datetime.datetime.now())[0:19]}), headers={'Content-type': 'application/json;charset=utf-8'})
+            r = self.client.post(test_url, data=json.dumps({'heart_rate_data': heart_rate_data, 'time': str(datetime.datetime.now())[0:19]}), headers={'Content-type': 'application/json;charset=utf-8'})
             print r.data
         print '-'*20
 
