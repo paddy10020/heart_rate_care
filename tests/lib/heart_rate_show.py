@@ -9,13 +9,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
 
-# def middle_filter(origin_data):
-#     '''中值滤波'''
-#     origin_data_len = len(origin_data)
-#     if origin_data <= 5:
-#         return 0
-#     for i in range(origin_data_len-5):
-#         tmp = 
+# 采样频率
+Fs = 20.0
+Ts = 1.0/Fs
+
 # 读取信号
 with open('./heart_rate_data.txt', 'r') as f:
     heart_rate_data = [int(i.strip()) for i in f.readlines()]
@@ -29,9 +26,9 @@ plt.title('origin_data')
 plt.plot(heart_rate_data)
 plt.subplot(222)
 plt.title('fft_data')
-fft_data = fft_data[0:len(fft_data)/2]
+fft_data = np.abs(fft_data[0:len(fft_data)/2])
 #x_data = np.asarray([i*0.05 for i in range(len(fft_data))])
-x_data = np.arange(0, len(fft_data)*0.05, 0.05)
+x_data = np.arange(0, len(fft_data)*Ts, Ts)
 plt.plot(x_data, fft_data)
 filtered_data = signal.medfilt(heart_rate_data, 3)
 #b,a = signal.butter(10, 0.15, 'low')
@@ -42,5 +39,9 @@ plt.plot(filtered_data)
 filtered_fft_data = np.fft.fft(filtered_data)
 plt.subplot(224)
 plt.title('fft_data')
-plt.plot(filtered_fft_data)
-plt.show()
+filtered_fft_data = np.abs(filtered_fft_data[0:len(filtered_fft_data)/2])
+xx_data = np.arange(0, len(filtered_fft_data)*Ts, Ts)
+plt.plot(xx_data, filtered_fft_data)
+# plt.show()
+print len(filtered_fft_data)
+
