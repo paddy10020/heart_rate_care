@@ -15,7 +15,7 @@ click==6.7
 ConcurrentLogHandler==0.9.1
 crypto==1.4.1
 cryptography==1.9
-Django==1.11.3
+Django==1.11.28
 enum34==1.1.6
 Flask==0.12.1
 Flask-Admin==1.5.0
